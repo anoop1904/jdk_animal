@@ -13,9 +13,9 @@ class DashboardController extends Controller
     public function index()
     {
         $total_roles = count(Role::select('id')->get());
-        $total_admins = count(User::select('id')->get());
+        $total_users = count(User::select('id')->get());
         $total_permissions = count(Permission::select('id')->get());
-        return view('admin.dashboard.index', compact('total_admins', 'total_roles', 'total_permissions'));
+        return view('admin.dashboard.index', compact('total_users', 'total_roles', 'total_permissions'));
     }
 
 

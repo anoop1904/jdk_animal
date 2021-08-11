@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -14,7 +18,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return view('admin.permissions.index', compact('permissions'));
     }
 
     /**
@@ -24,7 +29,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+         return view('admin.permissions.create');
     }
 
     /**
@@ -35,7 +40,27 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           // Validation Data
+           $request->validate([
+            'name' => 'required|max:50',
+            'guard_name' => 'required',
+            'permission_action' => 'required',
+        ]);
+
+        // Create New User
+        // dd($request->permission_action);
+
+        foreach($request->permission_action as $key=>$permission_action)
+        {
+            $permission = new Permission();
+            $permission->name = $request->name.'.'.$permission_action;
+            $permission->guard_name = $request->guard_name;
+            $permission->group_name = $request->name;  
+            $permission->save();
+        }   
+ 
+        session()->flash('success', 'User has been created !!');
+        return redirect()->route('permissions.index');
     }
 
     /**
@@ -57,7 +82,9 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permission = Permission::find($id);
+        $permissions = Permission::where('group_name', $permission->group_name)->get();
+        return view('admin.permissions.edit', compact('permission', 'permissions'));
     }
 
     /**
@@ -67,9 +94,31 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+       Permission::where('group_name', $permission->group_name)->delete();
+           // Validation Data
+        $request->validate([
+            'name' => 'required|max:50',
+            'guard_name' => 'required',
+            'permission_action' => 'required',
+        ]);
+
+        // Create New User
+        // dd($request->permission_action);
+
+        foreach($request->permission_action as $key=>$permission_action)
+        {
+            $permission = new Permission();
+            $permission->name = $request->name.'.'.$permission_action;
+            $permission->guard_name = $request->guard_name;
+            $permission->group_name = $request->name;  
+            $permission->save();
+        }   
+ 
+        session()->flash('success', 'Permission has been updated !!');
+        return redirect()->route('permissions.index');
+
     }
 
     /**
@@ -80,6 +129,12 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $permission = Permission::find($id);
+        if (!is_null($permission)) {
+            $permission->delete();
+        }
+
+        session()->flash('success', 'User has been deleted !!');
+        return back();
     }
 }
