@@ -50,7 +50,8 @@
                                     <td>{{ $product->en_name }}</td>
                                     <td>{{ $product->price }}</td>                         
                                     <td>
-                                        {{@$image->image_name}}
+                                        
+                                        <img src="{{ asset('storage/product_images/'.$image->image_name) }}" alt="" width="100px"> 
                                     </td>                         
                                     <td>
                                         <a class="btn btn-success text-white" href="{{ route('products.edit', $product->id) }}">Edit</a>

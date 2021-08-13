@@ -2,9 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <a href="{{url('login_with_otp')}}" style="color: #ffffff; background: #1f2937; padding: 8px 10px; border-radius: 6px;">
-                    Login with Mobile
-                </a>
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>
 

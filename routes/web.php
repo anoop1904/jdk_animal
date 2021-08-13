@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -27,18 +28,21 @@ Route::get('/', function(){
     return redirect('admin/dashboard');
 });
 
-Route::group(['prefix'=>'admin'], function(){
+Route::get('login_with_otp', [AdminController::class, 'login_with_otp']);
+Route::post('enter_otp', [AdminController::class, 'enter_otp']);
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('login', [AdminController::class, 'index']);
 
     Route::get('/dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
-    Route::resource('products', ProductController::class);
-
-
-
+    Route::resource('products', ProductController::class);    
 });
 
-
+Route::fallback(function () {
+    return view('welcome');
+});
 
 require __DIR__.'/auth.php';
