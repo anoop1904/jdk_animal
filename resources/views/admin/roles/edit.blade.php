@@ -89,6 +89,7 @@
 
 
 @section('js_section')
+@include('admin.roles.partials.scripts')
 <script>
     $(function () { 
       $('#roles_index').DataTable({

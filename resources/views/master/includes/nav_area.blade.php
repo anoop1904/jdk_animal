@@ -36,6 +36,29 @@
         </div>
       </li>
 
+      <li class="nav-item text-danger">
+        <div class="nav-item dropdown">       
+          <a class="nav-link dropdown-toggle text-dark" href="http://example.com" id="dropdown09" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+               @if(Session::has('locale'))
+                       @if(session('locale') == 'tg')
+                       <span class="flag-icon flag-icon-in"> </span> {{ 'తెలుగు' }}
+                     @else
+                     <span class="flag-icon flag-icon-us"> </span> {{ 'English' }}                 
+                     @endif
+               @else
+               {{ 'English' }} 
+               @endif
+             </a>          
+           <div class="dropdown-menu" aria-labelledby="dropdown09">
+               <a class="dropdown-item" href="{{url('language/en')}}"><span class="flag-icon flag-icon-us"> </span> English </a>
+               <a class="dropdown-item" href="{{url('language/tg')}}"><span class="flag-icon flag-icon-in"> </span> తెలుగు </a>
+            </div>
+         </div>
+      </li>
+
+
+
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">

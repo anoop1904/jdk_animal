@@ -15,18 +15,23 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('category_id');   
-            $table->foreignId('sub_category_id');   
-            $table->foreignId('images_id');   
-            $table->float('price', 8, 2);       
-            $table->string('color');        
-            $table->string('gender');
-            $table->string('age');
-            $table->enum('pregnancy', ['yes', 'no']);
-            $table->string('feed');
-            $table->text('breed');
-            $table->text('about');         
+            $table->string('en_name');
+            $table->string('tg_name');
+            $table->string('en_product_category')->nullable();   
+            $table->string('tg_product_category')->nullable();   
+            $table->string('en_product_sub_category')->nullable();   
+            $table->string('tg_product_sub_category')->nullable();   
+            $table->string('en_product_feed')->nullable();   
+            $table->string('tg_product_feed')->nullable();   
+            $table->string('en_product_breed')->nullable();        
+            $table->string('tg_product_breed')->nullable();        
+            $table->string('en_product_about')->nullable();
+            $table->string('tg_product_about')->nullable();
+            $table->string('product_distance')->nullable();
+            $table->float('product_amount', 8, 2)->nullable();          
+            $table->enum('pregnancy', ['yes', 'no'])->nullable();  
+            $table->string('product_color')->nullable();
+            $table->string('product_age')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('language/{lang}', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->back();
+})->middleware('language');
+
 Route::get('/', function(){
     return redirect('admin/dashboard');
 });
@@ -26,6 +33,7 @@ Route::group(['prefix'=>'admin'], function(){
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
+    Route::resource('products', ProductController::class);
 
 
 

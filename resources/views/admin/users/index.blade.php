@@ -29,7 +29,7 @@
                     </p>
                     <div class="clearfix"></div>
                     <div class="data-tables">                  
-                        <table id="dataTable" class="text-center">
+                        <table id="dataTable" class="text-center table">
                             <thead class="bg-light text-capitalize">
                                 <tr>
                                     <th width="5%">Sl</th>

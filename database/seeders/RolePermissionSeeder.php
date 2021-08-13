@@ -37,8 +37,7 @@ class RolePermissionSeeder extends Seeder
                     'blog.create',
                     'blog.view',
                     'blog.edit',
-                    'blog.delete',
-                    'blog.approve',
+                    'blog.delete',           
                 ]
             ],
             [
@@ -48,8 +47,7 @@ class RolePermissionSeeder extends Seeder
                     'admin.create',
                     'admin.view',
                     'admin.edit',
-                    'admin.delete',
-                    'admin.approve',
+                    'admin.delete',                    
                 ]
             ],
             [
@@ -60,7 +58,6 @@ class RolePermissionSeeder extends Seeder
                     'role.view',
                     'role.edit',
                     'role.delete',
-                    'role.approve',
                 ]
             ],
             [
