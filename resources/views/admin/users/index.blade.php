@@ -32,11 +32,12 @@
                         <table id="dataTable" class="text-center table">
                             <thead class="bg-light text-capitalize">
                                 <tr>
-                                    <th width="5%">Sl</th>
-                                    <th width="10%">Name</th>
-                                    <th width="10%">Email</th>
-                                    <th width="40%">Roles</th>
-                                    <th width="15%">Action</th>
+                                    <th width="">Sl</th>
+                                    <th width="">Name</th>
+                                    <th width="">Email</th>
+                                    <th width="">Mobile</th>
+                                    <th width="">Roles</th>
+                                    <th width="">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,7 @@
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->mobile_number }}</td>
                                     <td>
                                         @foreach ($user->roles as $role)
                                             <span class="badge badge-info mr-1">

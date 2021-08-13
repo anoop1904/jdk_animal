@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->float('product_amount', 8, 2)->nullable();          
             $table->enum('pregnancy', ['yes', 'no'])->nullable();  
             $table->string('product_color')->nullable();
+            $table->string('image_name')->nullable();
             $table->string('product_age')->nullable();
             $table->timestamps();
         });

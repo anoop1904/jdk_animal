@@ -39,12 +39,14 @@ class ProductController extends Controller
     {
         // Validation Data
         $request->validate([
-            'name' => 'required',
-            'product_category' => 'required',
-            'product_food' => 'required',
+            'en_name' => 'required',
+            'tg_name' => 'required',
+            'en_product_category' => 'required',
+            'tg_product_category' => 'required',
+            'en_product_feed' => 'required',
+            'tg_product_feed' => 'required',
             'product_amount' => 'required',
-        ]);
-    
+        ]);    
             // Create New User
             $product = new Product();
             $product->en_name = $request->en_name;
@@ -64,13 +66,17 @@ class ProductController extends Controller
             $product->pregnancy = $request->pregnancy;
             $product->product_color = $request->product_color;
             $product->product_age = $request->product_age;
-            $product->save();
+            $pro_id = $product->save();
+            $image_name = '';
             if($request->file('product_images')){
-                foreach($request->file('product_images') as $image)
+                foreach($request->file('product_images') as $key=>$image)
                 {         
                     $productImage = new ProductImage();                           
                     $originalName = $image->getClientOriginalName();             
                     $myfile =  $productImage->image_name = time().$originalName; 
+                    if($key == 0){
+                        $image_name = $myfile;
+                    }                   
                     $productImage->image_name = $myfile;
                     if($product->product_images()->save($productImage))
                     {
@@ -78,6 +84,7 @@ class ProductController extends Controller
                     }   
                 }
             }
+            Product::where('id', $pro_id)->update(['image_name'=>$image_name]);
             session()->flash('success', 'Product has been inserted !!');
             return redirect('admin/products'); 
     }
@@ -115,14 +122,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validation Data
+         // Validation Data
          $request->validate([
-            'name' => 'required',
-            'product_category' => 'required',
-            'product_food' => 'required',
+            'en_name' => 'required',
+            'tg_name' => 'required',
+            'en_product_category' => 'required',
+            'tg_product_category' => 'required',
+            'en_product_feed' => 'required',
+            'tg_product_feed' => 'required',
             'product_amount' => 'required',
-        ]);
-    
+        ]);    
             // Create New User
             $product = Product::find($id);
             $product->en_name = $request->en_name;
@@ -143,7 +152,7 @@ class ProductController extends Controller
             $product->product_color = $request->product_color;
             $product->product_age = $request->product_age;
             $pro_id = $product->save();
-      
+            $image_name = '';
             if($request->file('product_images')){
                 $productImage = new ProductImage(); 
                 $product_img = $product->product_images()->get();            
@@ -156,11 +165,15 @@ class ProductController extends Controller
                         }         
                     } 
                 } 
-                foreach($request->file('product_images') as $image)
+
+                foreach($request->file('product_images') as $key=>$image)
                 {         
                     $productImage = new ProductImage();  
                     $originalName = $image->getClientOriginalName();             
                     $myfile =  $productImage->image_name = time().$originalName; 
+                    if($key == 0){
+                        $image_name = $myfile;
+                    }             
                     $productImage->image_name = $myfile;
                     if($product->product_images()->save($productImage))
                     {
@@ -168,7 +181,7 @@ class ProductController extends Controller
                     }   
                 }
             }
-
+            Product::where('id', $pro_id)->update(['image_name'=>$image_name]);
             session()->flash('success', 'Product has been Updated !!');
             return redirect('admin/products'); 
     }

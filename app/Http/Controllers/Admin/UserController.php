@@ -46,6 +46,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:users',
+            'mobile_number' => 'required|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
 
@@ -53,6 +54,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->mobile_number = $request->mobile_number;
         $user->password = Hash::make($request->password);
         $user->save();
 
@@ -61,7 +63,7 @@ class UserController extends Controller
         }
 
         session()->flash('success', 'User has been created !!');
-        return redirect()->route('admin.users');
+        return redirect('admin/users');
     }
 
     /**
@@ -104,12 +106,14 @@ class UserController extends Controller
          $request->validate([
              'name' => 'required|max:50',
              'email' => 'required|max:100|email|unique:users,email,' . $id,
+             'mobile_number' => 'required|mobile_number|unique:users,email,' . $id,
              'password' => 'nullable|min:6|confirmed',
          ]);
  
  
          $user->name = $request->name;
          $user->email = $request->email;
+         $user->mobile_number = $request->mobile_number;
          if ($request->password) {
              $user->password = Hash::make($request->password);
          }

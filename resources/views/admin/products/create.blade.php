@@ -32,18 +32,20 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="en_name">Product Name in English</label>
+                                <label for="en_name">Product Name in English <span class="text-danger">*</span> </label>
                                 <input type="text" class="form-control" id="en_name" name="en_name" placeholder="Enter Name">
+                            <span class="text-danger">@error('en_name'){{"Name field in English is Required"}}@enderror</span>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="tg_name">తెలుగులో ఉత్పత్తి పేరు</label>
+                                <label for="tg_name">తెలుగులో ఉత్పత్తి పేరు <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="tg_name" name="tg_name" placeholder="పేరు నమోదు చేయండి">
+                                <span class="text-danger">@error('en_name'){{"Name field in Telugu is Required"}}@enderror</span>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="en_product_category">Product category</label>
+                                <label for="en_product_category">Product category <span class="text-danger">*</span></label>
                                 <select name="en_product_category" id="en_product_category" class="form-control select2">                              
                                         <option value="fist">fist</option>
                                         <option value="second">second</option>
@@ -52,7 +54,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="tg_product_category">ఉత్పత్తి వర్గం</label>
+                                <label for="tg_product_category">ఉత్పత్తి వర్గం <span class="text-danger">*</span></label>
                                 <select name="tg_product_category" id="tg_product_category" class="form-control select2">                              
                                         <option value="మొదటి వర్గం">మొదటి వర్గం</option>
                                         <option value="రెండవ వర్గం">రెండవ వర్గం</option>
@@ -85,7 +87,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="en_product_feed">Food</label>
+                                <label for="en_product_feed">Food <span class="text-danger">*</span></label>
                                 <select name="en_product_feed" id="en_product_feed" class="form-control select2">                              
                                         <option value="fist">fist</option>
                                         <option value="second">second</option>
@@ -94,7 +96,7 @@
                                 </select>
                             </div>  
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="tg_product_feed">ఆహారం</label>
+                                <label for="tg_product_feed">ఆహారం <span class="text-danger">*</span></label>
                                 <select name="tg_product_feed" id="tg_product_feed" class="form-control select2">                              
                                     <option value="మొదటి వర్గం">మొదటి వర్గం</option>
                                     <option value="రెండవ వర్గం">రెండవ వర్గం</option>
@@ -148,7 +150,7 @@
                                 </div>                    
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="product_amount">Amount</label>
+                                <label for="product_amount">Amount <span class="text-danger">*</span></label>
                                 <input type="text" name="product_amount" id="product_amount" class="form-control" placeholder="Enter amount">
                             </div> 
                         </div>
