@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('contry_code')->nullable();
             $table->string('otp')->nullable();
             $table->integer('otp_count')->nullable();
-            $table->string('user_reg_status');
+            $table->string('user_reg_status')->default('0');
             $table->string('device_type')->nullable();
             $table->integer('device_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
