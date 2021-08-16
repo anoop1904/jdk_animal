@@ -31,7 +31,11 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src=".{{asset('dist/js/demo.js')}}"></script>
+<script>
+  $(".myswitch").bootstrapSwitch();
+</script>
 @include('sweetalert::alert')
     @yield('js_section')
+
 </body>
 </html>
