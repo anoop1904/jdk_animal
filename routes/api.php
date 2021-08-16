@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('verifyMobileOtp', 'App\Http\Controllers\ApiController@otpVerification');
+Route::post('phoneNumberVerification', 'App\Http\Controllers\ApiController@phoneNumberVerification');

@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -18,13 +19,14 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'mobile_number',
-        'user_reg_status',
-        'password',
-    ];
+    protected $guarded = [];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'mobile_number',
+    //     'user_reg_status',
+    //     'password',
+    // ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -35,7 +37,20 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
 
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
     /**
      * The attributes that should be cast to native types.
      *

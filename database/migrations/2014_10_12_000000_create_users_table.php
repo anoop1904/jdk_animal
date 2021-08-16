@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('otp_count')->nullable();
             $table->string('user_reg_status')->default('0');
             $table->string('device_type')->nullable();
-            $table->integer('device_id')->nullable();
+            $table->string('device_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
