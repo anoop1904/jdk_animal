@@ -25,15 +25,13 @@
 <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {{-- sweet alert  --}}
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src=".{{asset('dist/js/demo.js')}}"></script>
-<script>
-  $(".myswitch").bootstrapSwitch();
-</script>
 @include('sweetalert::alert')
     @yield('js_section')
 
