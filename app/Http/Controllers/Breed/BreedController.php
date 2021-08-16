@@ -15,7 +15,8 @@ class BreedController extends Controller
      */
     public function index()
     {
-        // return view('admin.breed.index');
+        $breeds = Breed::all();
+        return view('admin.breed.index', compact('breeds'));
     }
 
     /**
@@ -25,7 +26,7 @@ class BreedController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.breed.create');
     }
 
     /**
@@ -36,7 +37,18 @@ class BreedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'en_name' => 'required',   
+            'tg_name' => 'required',   
+        ]);    
+            // Create New User
+            $breed = new Breed();
+            $breed->en_name = $request->en_name;
+            $breed->tg_name = $request->tg_name;
+            $breed->save();
+
+        session()->flash('success', 'Breed has been created !!');
+        return redirect('admin/breeds');  
     }
 
     /**
@@ -58,7 +70,8 @@ class BreedController extends Controller
      */
     public function edit($id)
     {
-        //
+        $breed = Breed::find($id);
+        return view('admin.breed.edit', compact('breed')); 
     }
 
     /**
@@ -70,7 +83,13 @@ class BreedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $breed = Breed::find($id);
+        $breed->en_name = $request->en_name;
+        $breed->tg_name = $request->tg_name;
+        $breed->save();
+
+        session()->flash('success', 'Breed has been updated !!');
+        return redirect('admin/breeds');  
     }
 
     /**
@@ -81,6 +100,12 @@ class BreedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $breed = Breed::find($id);
+        if (!is_null($breed)) {
+            $breed->delete();
+        }
+
+        session()->flash('success', 'Breed has been deleted !!');
+        return back();
     }
 }

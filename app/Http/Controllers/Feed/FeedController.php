@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Feed;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Feed\Feed;
 
 class FeedController extends Controller
 {
@@ -14,7 +15,8 @@ class FeedController extends Controller
      */
     public function index()
     {
-        return view('admin.feed.index');
+        $feeds = Feed::all();
+        return view('admin.feed.index', compact('feeds'));
     }
 
     /**
@@ -35,12 +37,18 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       $request->validate([
             'en_name' => 'required',   
+            'tg_name' => 'required',   
         ]);    
             // Create New User
-            $product = new Product();
-            $product->en_name = $request->en_name;
+            $feed = new Feed();
+            $feed->en_name = $request->en_name;
+            $feed->tg_name = $request->tg_name;
+            $feed->save();
+
+        session()->flash('success', 'Feed has been created !!');
+        return redirect('admin/feeds');  
     }
 
     /**
@@ -61,8 +69,9 @@ class FeedController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+       $feed = Feed::find($id);
+        return view('admin.feed.edit', compact('feed'));
     }
 
     /**
@@ -74,7 +83,13 @@ class FeedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $feed = Feed::find($id);
+        $feed->en_name = $request->en_name;
+        $feed->tg_name = $request->tg_name;
+        $feed->save();
+
+        session()->flash('success', 'Feed has been updated !!');
+        return redirect('admin/feeds');  
     }
 
     /**
@@ -85,6 +100,12 @@ class FeedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $feed = Feed::find($id);
+        if (!is_null($feed)) {
+            $feed->delete();
+        }
+
+        session()->flash('success', 'Feed has been deleted !!');
+        return back();
     }
 }
