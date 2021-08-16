@@ -140,6 +140,7 @@ class ApiController extends Controller
     }
     public function otpVerification(Request $request)
     {
+        // return response()->json($request->all());
         $validator = Validator::make($request->all(), [
             'mobile_number' => 'required',
             'otp' => 'required',
