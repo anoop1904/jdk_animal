@@ -39,32 +39,36 @@
                   <thead>
                      <tr>
                         <th width="">Sr. No.</th>
-                        <th width="">Image</th>
-                        <th width="">Name</th>
-                        <th width="">Parent</th>
-                        <th width="">Date/Time Added</th>
+                        <th width="">Product</th>
+                        <th width="">Category</th>
+                        <th width="">Weight</th>
+                        <th width="">unit</th>
+                        <th width="">Qty</th>
+                        <th width="">Price</th>
+                        <th width="">Discount</th>
+                        <th width="">Stock</th>
                         <th width="">Status</th>
-                        <th width="">Operations</th>
+                        <th width="">Actions</th>
                      </tr>
                   </thead>
                   <tbody> 
-                    @foreach ($categories as $key=>$category)             
+                    @foreach ($inventories as $key=>$inventory)             
                      <tr>
-                        <td>1</td>
-                        <td>               
-                           <img src="{{asset('storage/category_image/'. $category->banner_image)}}" style="height: 80px;width: 80px;">
-                        </td>
-                        <td>{{$category->name}}</td>
+                        <td>{{$key+1}}</td>
+                        <td>{{$inventory->product}}</td>
+                        <td>{{$inventory->category}}</td>                   
+                        <td>{{$inventory->weight}}</td>
+                        <td>{{$inventory->unit}}</td>
+                        <td>{{$inventory->quantity}}</td>
+                        <td>{{$inventory->price}}</td>
+                        <td>{{$inventory->discount}}</td>
+                        <td>{{$inventory->current_stock}}</td>                 
                         <td>
-                         {{$category->paren_id ? $category->paren_id : 'No parent'}}
-                        </td>
-                        <td>August 13, 2021</td>
-                        <td>
-                        <button id="{{$category->id}}" value="{{$category->IsActive}}" onclick="is_active(id)" class="btn btn-sm {{$category->IsActive ? 'btn-primary' : 'btn-danger'}}">{{$category->IsActive ? 'Active' : 'Deactive'}}</button>     
+                        <button id="{{$inventory->id}}" value="{{$inventory->IsActive}}" onclick="is_active_inventory(id)" class="btn btn-sm {{$inventory->IsActive ? 'btn-primary' : 'btn-danger'}}">{{$inventory->IsActive ? 'Active' : 'Deactive'}}</button>     
                         </td>     
                         <td class="d-flex">
-          <a href="{{route('categories.edit', $category->id)}}" class="btn btn-info pull-left fa fa-pencil-square-o" style="margin-right: 3px;" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
-         <form method="POST" action="{{route('categories.destroy', $category->id)}}" accept-charset="UTF-8">
+          <a href="{{route('inventories.edit', $inventory->id)}}" class="btn btn-info pull-left fa fa-pencil-square-o" style="margin-right: 3px;" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+         <form method="POST" action="{{route('inventories.destroy', $inventory->id)}}" accept-charset="UTF-8">
              @method('DELETE') 
              @csrf
          <button type="submit" class="btn btn-danger la la-trash" title="Delete" onclick="return confirm('Do You want to Delete?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -99,14 +103,14 @@
     });
    });
 
-function is_active(id){ 
+function is_active_inventory(id){  
+  
    myid = document.getElementById(id);
    newid = myid.id;
    newvalue = myid.value;
-    
    $.ajax({
 					type: 'POST',
-					url: "{{ url('/admin/change_category_status') }}",
+					url: "{{ url('/admin/change_inventory_status') }}",
 					data: {
 						"_token": $('meta[name="csrf-token"]').attr('content'),	
 						"id": id,
@@ -114,7 +118,7 @@ function is_active(id){
 					},
 					success: function(data) {	
 								console.log(data);
-						window.location.reload();
+						// window.location.reload();
 					}
 				})
  

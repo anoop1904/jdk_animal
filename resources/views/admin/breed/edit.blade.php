@@ -26,47 +26,27 @@
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Edit User - {{ $user->name }}</h4>
-                                
-                    <form action="{{ route('users.update', $user->id) }}" method="POST">
-                        @method('PUT')
+                    <h4 class="header-title">Create New Feed</h4>                  
+                    
+                    <form action="{{ route('breeds.update', $breed->id) }}" method="POST">
+                        @method('put')
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">User Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="{{ $user->name }}">
-                            </div>
+                                <label for="en_name">Feed Name in English</label>
+                                <input type="text" class="form-control" id="en_name" name="en_name" value="{{$breed->en_name}}" placeholder="Enter feed name">
+                            </div>     
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">User Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{ $user->email }}">
-                            </div>
-                        </div>
-                        <div class="form-row">               
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="mobile_number">Mobile Number</label>
-                                <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter Name">
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="password">Assign Roles</label>
-                                <select name="roles[]" id="roles" class="form-control select2" multiple>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                                <label for="tg_name">Feed Name in telugu</label>
+                                <input type="text" class="form-control" id="tg_name" name="tg_name" value="{{$breed->tg_name}}" placeholder="Enter feed name">
+                            </div>             
+                        </div>          
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
-                            </div>
-                        </div>       
-                        
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save User</button>
+                                <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save User</button>
+                            </div>                
+                        </div>  
+                       
                     </form>
                 </div>
             </div>

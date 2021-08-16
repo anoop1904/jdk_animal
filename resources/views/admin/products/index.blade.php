@@ -32,11 +32,12 @@
                         <table id="products_index" class="table table-striped">
                             <thead class="bg-light text-capitalize">
                                 <tr>
-                                    <th width="5%">Sl</th>
-                                    <th width="10%">Name</th>
-                                    <th width="10%">Price</th>
-                                    <th width="40%">Group Name</th>
-                                    <th width="15%">Action</th>
+                                    <th width="">Sl</th>
+                                    <th width="">Name</th>
+                                    <th width="">Price</th>
+                                    <th width="">Aminal Image</th>
+                                    <th width="">Distance</th>
+                                    <th width="">Action</th>
                                 </tr>
                             </thead>
                             <tbody>                          
@@ -53,6 +54,7 @@
                                         
                                         <img src="{{ asset('storage/product_images/'.$image->image_name) }}" alt="" width="100px"> 
                                     </td>                         
+                                    <td>{{ $product->product_distance }}</td>                         
                                     <td>
                                         <a class="btn btn-success text-white" href="{{ route('products.edit', $product->id) }}">Edit</a>
 

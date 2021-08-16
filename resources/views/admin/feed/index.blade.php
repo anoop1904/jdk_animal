@@ -33,44 +33,33 @@
                             <thead class="bg-light text-capitalize">
                                 <tr>
                                     <th width="">Sl</th>
-                                    <th width="">Name</th>
-                                    <th width="">Quantity</th>
-                                    <th width="">Unit</th>
-                                    <th width="">Parent</th>
-                                    <th width="">Status</th>
+                                    <th width="">Name</th>                                   
                                     <th width="">Date/Time</th>
                                     <th width="">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               {{-- @foreach ($users as $user)
+                               @foreach ($feeds as $feed)
                                <tr>
                                     <td>{{ $loop->index+1 }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->mobile_number }}</td>
+                                    <td>{{ $feed->en_name }}</td>                                  
+                                    <td>{{ $feed->created_at }}</td>                                  
+                     
                                     <td>
-                                        @foreach ($user->roles as $role)
-                                            <span class="badge badge-info mr-1">
-                                                {{ $role->name }}
-                                            </span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-success text-white" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                                        <a class="btn btn-success text-white" href="{{ route('feeds.edit', $feed->id) }}">Edit</a>
 
-                                        <a class="btn btn-danger text-white" href="{{ route('users.destroy', $user->id) }}"
-                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->id }}').submit();">
+                                        <a class="btn btn-danger text-white" href="{{ route('feeds.destroy', $feed->id) }}"
+                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $feed->id }}').submit();">
                                             Delete
                                         </a>
 
-                                        <form id="delete-form-{{ $user->id }}" action="{{ url('admin/users', $user->id) }}" method="POST" style="display: none;">
+                                        <form id="delete-form-{{ $feed->id }}" action="{{ url('admin/feeds', $feed->id) }}" method="POST" style="display: none;">
                                             @method('DELETE')
                                             @csrf
                                         </form>
                                     </td>
                                 </tr>
-                               @endforeach --}}
+                               @endforeach
                             </tbody>
                         </table>
                     </div>
