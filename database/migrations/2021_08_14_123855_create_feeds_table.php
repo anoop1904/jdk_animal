@@ -15,6 +15,8 @@ class CreateFeedsTable extends Migration
     {
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
+            $table->string('en_name');
+            $table->string('tg_name');
             $table->timestamps();
         });
     }
